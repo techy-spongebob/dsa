@@ -1,5 +1,4 @@
 package nerd.techy.spongebob.dsa.leetcode.solutions.app;
-
 /*
  * Problem: 
  * 
@@ -17,33 +16,32 @@ package nerd.techy.spongebob.dsa.leetcode.solutions.app;
  * All given inputs are in lowercase letters a-z.
  * 
  * Solution:
- * Horizontal Scanning
+ * Vertical Scanning
  * 
  * Time Complexity: 
- *      Best Case: When the second word is different, O(l) where l is the length of the first word.
+ *      Best Case: there are at most n * minLen comparisons where minLen is the length of the shortest string in the array. 
  *      Worst Case: When all words are same, O(S) where S is the sum of all characters in the input array.
  * 
  * Space Complexity: O(1)
  */
-
-public class LC0014SubOptimalHorizontalScanningSolution {
+public class LC0014OptimalVerticalScanningSolution {
     public String longestCommonPrefix(String[] strs) {
         
         if(strs == null || strs.length == 0) {
             return "";
         }
         
-        int size = strs.length;
-        String prefix = strs[0];
-        int prefixLength = prefix.length();
+        int n = strs[0].length();
         
-        for(int i=1; i<size; i++) {
-            while(strs[i].indexOf(prefix) != 0) {
-                prefix = prefix.substring(0, --prefixLength);
-                if(prefixLength == 0) return "";
+        for(int i=0;i<n;i++) {
+            char ch = strs[0].charAt(i);
+            for(int j=1; j<strs.length; j++) {
+                if(i == strs[j].length() || ch != strs[j].charAt(i)) {
+                    return strs[0].substring(0, i);
+                }
             }
         }
         
-        return prefix;
+        return strs[0];
     }
 }
